@@ -1,0 +1,24 @@
+{
+  "name": "gitbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VzqzAc/twgitbot.git"
+  },
+  "keywords": [
+    "bot",
+    "twitter",
+    "github"
+  ],
+  "author": "VzqzAc",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VzqzAc/twgitbot/issues"
+  },
+  "homepage": "https://github.com/VzqzAc/twgitbot#readme"
+}
