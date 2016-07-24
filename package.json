@@ -1,10 +1,11 @@
 {
   "name": "gitbot",
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple bot that twits github commits commits",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prestart": "node firstTwit.js",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -15,6 +16,9 @@
     "twitter",
     "github"
   ],
+  "dependencies": {
+    "twit": "^2.2.4"
+  },
   "author": "VzqzAc",
   "license": "ISC",
   "bugs": {
