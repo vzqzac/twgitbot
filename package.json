@@ -4,7 +4,7 @@
   "description": "A simple bot that twits github commits commits",
   "main": "index.js",
   "scripts": {
-    "prestart": "node firstTwit.js",
+    "postinstall": "node firstTwit.js",
     "start": "node index.js"
   },
   "repository": {

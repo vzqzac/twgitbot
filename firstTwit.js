@@ -1,4 +1,4 @@
-console.log('Your first Twgit is bein published');
+console.log('Your first Twgit is being published');
 
 var Twit = require('twit');
 
@@ -15,7 +15,7 @@ function firstTwit() {
 	twit.post('statuses/update', tweet, tweeted);
 	function tweeted(err, data, response) {
 		if(err) {
-			console.log("Didn't work :( ");
+			console.log(err);
 		} else {
 	  		console.log("Worked /,,/,");
 	  	}
