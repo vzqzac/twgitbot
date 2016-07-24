@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "node firstTwit.js",
-    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +16,7 @@
     "github"
   ],
   "dependencies": {
+    "commander": "^2.9.0",
     "twit": "^2.2.4"
   },
   "author": "VzqzAc",
