@@ -1,7 +1,7 @@
 var config = require('./config');
 var Twit = require('twit');
 var twgit = require('commander');
-var repo = require('./repoConfig.js');
+var repo = require('./repoConfig');
 
 var twit = new Twit(config);
 
@@ -16,6 +16,3 @@ if(twgit.author && twgit.url) {
 } else {
 	console.log("Append -a 'Author of repo' and -u 'Source code'");
 }
-
-
-// understand commander

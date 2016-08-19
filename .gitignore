@@ -2,3 +2,5 @@
 config.js
 # dependencies
 node_modules
+# webstorm
+.idea
