@@ -9,7 +9,7 @@ A node.js bot that checks a github repo changes and  *tweets* it to your Twitter
 
 **Twgitbot** doesn't:
 
- - Hack anything... Or does he? :frowing:
+ - Hack anything... Or does he? :frowning:
  - Make coffee, unfortunately
 
 To try just:
@@ -22,4 +22,5 @@ To try just:
 Special thanks to [@bashz](https://github.com/bashz) for contributing
 
 Better code using:
+
 [![JavaScript Style Guide](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
