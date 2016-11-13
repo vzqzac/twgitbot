@@ -19,7 +19,7 @@ To try just:
     # Fill the prompted form to share your first Twgit
  And that's it! Deploy to your prefferred provider and Twgitbot will do the rest for you.
 
-Special thanks to [@bashz](https://github.com/bashz) for contributing
+Special thanks to [@bashz](https://github.com/bashz) and [@omarandstuff, David de Anda](https://github.com/omarandstuff) or contributing
 
 Better code using:
 
