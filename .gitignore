@@ -4,3 +4,6 @@ config.js
 node_modules
 # webstorm
 .idea
+# OS generated
+.DS_Store*
+[Tt]humbs.db

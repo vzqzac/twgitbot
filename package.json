@@ -1,5 +1,5 @@
 {
-  "name": "gitbot",
+  "name": "twgitbot",
   "version": "1.0.0",
   "description": "A simple bot that twits github commits commits",
   "main": "index.js",
