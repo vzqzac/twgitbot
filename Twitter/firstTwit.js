@@ -4,6 +4,7 @@ const fs = require('fs')
 const path = require('path')
 const Twit = require('twit')
 const inquirer = require('inquirer')
+require('../Github/repoChecker').lastCheck((new Date()).toISOString())
 
 inquirer.prompt([
   {
@@ -46,9 +47,8 @@ inquirer.prompt([
         }]).then(function (gitAnswers) {
           createFile('../Github/repoConfig.js', gitAnswers, function (err) {
             if (err) return console.log(err)
-            // const config = require('./config')
-            // let twit = new Twit(config)
-            // firstTwit(twit)
+            let twit = new Twit(require('./config'))
+            firstTwit(twit)
           })
         })
     })
@@ -72,7 +72,7 @@ let firstTwit = function (twit) {
   }
   twit.post('statuses/update', tweet, tweeted)
   function tweeted (err) {
-    if (err) return console.log(err)
+    if (err) return console.log('error', err)
     console.log('First Twgit Worked /,,/,')
   }
 }

@@ -1,5 +1,5 @@
 module.exports = {
-  'github_username': 'asdasd',
-  'github_repo_name': 'asdasd',
-  'github_repo_url': 'asdasd'
+  'github_username': 'VzqzAc',
+  'github_repo_name': 'twgitbot',
+  'github_repo_url': 'https://github.com/VzqzAc/twgitbot'
 }
