@@ -1,16 +1,14 @@
 const repo = require('../Github/repoConfig')
-const config = require('./config')
 const Twit = require('twit')
 
 module.exports = {
   createAndPost: function (commit, languages) {
-    console.log('config', require('./config'));
     let twit = new Twit(require('./config'))
     let langs = ''
     if (languages) {
       let count = 0
       langs += ', using '
-      for (key in languages) {
+      for (let key in languages) {
         if (count++ < 3) {
           langs += '#' + key + ' '
         }

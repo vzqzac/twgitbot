@@ -22,7 +22,6 @@ function getFromAPI (complementaryPath, callback) {
     res.on('end', function () {
       callback(JSON.parse(data))
     })
-
   })
 }
 
