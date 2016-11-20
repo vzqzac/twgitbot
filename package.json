@@ -4,6 +4,7 @@
   "description": "A simple bot that twits github commits commits",
   "main": "index.js",
   "scripts": {
+    "test": "standard",
     "postinstall": "node firstTwit.js"
   },
   "repository": {
@@ -16,9 +17,11 @@
     "github"
   ],
   "dependencies": {
-    "commander": "^2.9.0",
     "inquirer": "^1.2.2",
     "twit": "^2.2.4"
+  },
+  "devDependencies": {
+    "standard": "^8.5.0"
   },
   "author": "VzqzAc",
   "license": "ISC",

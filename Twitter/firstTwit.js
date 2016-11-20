@@ -44,18 +44,18 @@ inquirer.prompt([
           name: 'github_repo_url',
           message: 'Repo url to track: '
         }]).then(function (gitAnswers) {
-          createFile('/repoConfig.js', gitAnswers, function (err) {
+          createFile('../Github/repoConfig.js', gitAnswers, function (err) {
             if (err) return console.log(err)
-            const config = require('./config')
-            let twit = new Twit(config)
-            firstTwit(twit)
+            // const config = require('./config')
+            // let twit = new Twit(config)
+            // firstTwit(twit)
           })
         })
     })
   })
 
 let formatConfig = function (string) {
-  return string.replace(/^{/, '{\n\t').replace(/,/g, ',\n\t').replace(/"/g, "'").replace(/:/g, ': ').replace(/}$/, '\n}')
+  return string.replace(/^{/, '{\n  ').replace(/,/g, ',\n  ').replace(/"/g, "'").replace(/:/g, ': ').replace(/}$/, '\n}')
 }
 
 let createFile = function (target, answers, callback) {
@@ -66,7 +66,7 @@ let createFile = function (target, answers, callback) {
 }
 
 let firstTwit = function (twit) {
-  const git = require('repoConfig')
+  const git = require('../Github/repoConfig')
   let tweet = {
     status: 'Running my first #Twgit for my repo ' + git.github_repo_name + ' #Github #Twitter #Nodejs ' + git.github_repo_url
   }
