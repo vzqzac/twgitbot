@@ -1,3 +1,5 @@
+'use strict'
+
 const checker = require('./Github/repoChecker')
 const twitMessager = require('./Twitter/postTwit')
 

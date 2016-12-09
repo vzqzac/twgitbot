@@ -1,11 +1,11 @@
 {
   "name": "twgitbot",
   "version": "0.0.2",
-  "description": "A simple bot that twits github commits commits",
+  "description": "A simple bot that twits github commits",
   "main": "index.js",
   "scripts": {
     "test": "standard",
-    "postinstall": "node firstTwit.js"
+    "postinstall": "node Twitter/firstTwit.js"
   },
   "repository": {
     "type": "git",
@@ -23,10 +23,13 @@
   "devDependencies": {
     "standard": "^8.5.0"
   },
-  "author": "VzqzAc",
-  "license": "ISC",
+  "author": "Omar Vazquez",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/VzqzAc/twgitbot/issues"
   },
-  "homepage": "https://github.com/VzqzAc/twgitbot#readme"
+  "homepage": "https://github.com/VzqzAc/twgitbot#readme",
+  "engines": {
+  "node": "6.1.0"
+  }
 }
