@@ -6,7 +6,7 @@
   "scripts": {
     "test": "standard",
     "start": "node index.js",
-    "postinstall": "node Twitter/firstTwit.js"
+    "first-twgit": "node Twitter/firstTwit.js"
   },
   "repository": {
     "type": "git",
