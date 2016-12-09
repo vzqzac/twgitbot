@@ -1,6 +1,6 @@
 {
   "name": "twgitbot",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "A simple bot that twits github commits",
   "main": "index.js",
   "scripts": {
