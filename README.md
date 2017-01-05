@@ -29,6 +29,6 @@ By the way, I will work on a script to automate a heroku deploy, **contributions
 
 Special thanks to [@bashz](https://github.com/bashz) and [@omarandstuff, David de Anda](https://github.com/omarandstuff) for contributing
 
-Better code using:
+Better code styling using:
 
 [![JavaScript Style Guide](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
