@@ -1,5 +1,4 @@
 ## Twgitbot ##
-----------
 A node.js bot that checks a github repo changes and  *tweets* it to your Twitter account
 
 **Twgitbot** does:
@@ -16,10 +15,19 @@ To try just:
 
     git clone https://github.com/VzqzAc/twgitbot.git && cd twgitbot
     npm install
+    # And to setup your custom config
+    npm run first-twgit
     # Fill the prompted form to share your first Twgit
- And that's it! Deploy to your prefferred provider and Twgitbot will do the rest for you.
+    
+Twgitbot is Heroku ready, so if you want to deploy it there you should run:
 
-Special thanks to [@bashz](https://github.com/bashz) and [@omarandstuff, David de Anda](https://github.com/omarandstuff) or contributing
+    heroku create <your twgitbot's name>
+    git push heroku master
+    # Wait for it
+Aaaand done, visit `<your twgitbot's name>.herokuapp.com` or run `heroku logs` just to make sure.
+By the way, I will work on a script to automate a heroku deploy, **contributions are welcome!**
+
+Special thanks to [@bashz](https://github.com/bashz) and [@omarandstuff, David de Anda](https://github.com/omarandstuff) for contributing
 
 Better code using:
 

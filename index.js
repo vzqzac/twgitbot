@@ -3,6 +3,8 @@
 const checker = require('./Github/repoChecker')
 const twitMessager = require('./Twitter/postTwit')
 
+// To set the lastCheck to current time
+checker.lastCheck((new Date()).toISOString())
 
 // In order to work with heroku I need a server so...
 const express = require('express')
