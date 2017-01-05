@@ -3,6 +3,7 @@
 const checker = require('./Github/repoChecker')
 const twitMessager = require('./Twitter/postTwit')
 
+
 // In order to work with heroku I need a server so...
 const express = require('express')
 const app = express()
@@ -27,7 +28,7 @@ try {
 
 function checkForChanges () {
   checker.fetchCommits(function (commits) {
-    if (!commits) return
+    if (!commits.length) return
     if (!checker.lastSHA || checker.lastSHA !== commits[0].sha) {
       checker.lastSHA = commits[0].sha
       checker.fetchLanguages(function (languages) {

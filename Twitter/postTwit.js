@@ -7,7 +7,7 @@ module.exports = {
     let langs = ''
     if (languages) {
       let count = 0
-      langs += ', using '
+      langs += ' Using '
       for (let key in languages) {
         if (count++ < 3) {
           langs += '#' + key + ' '

@@ -31,8 +31,10 @@ module.exports = {
   },
   lastSHA: lastSHA,
   fetchCommits: function (callback) {
-    lastCheck = (new Date()).toISOString()
+    console.log('fetchCommits', lastCheck)
     getFromAPI(COMMITS_PATH + lastCheck, function (commits) {
+      lastCheck = (new Date()).toISOString()
+      console.log('commitsinerepochecker', commits);
       callback(commits)
     })
   },
