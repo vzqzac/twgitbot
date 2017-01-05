@@ -8,7 +8,7 @@ const express = require('express')
 const app = express()
 
 app.all('*', function (req, res) {
-  res.send("Hello, I'm Twgitbot\nFind me on https://github.com/VzqzAc/twgitbot")
+  res.send('<div>Hello, I\'m Twgitbot<br>Find me on <a href="https://github.com/VzqzAc/twgitbot">GitHub</a></div>')
 })
 
 let port = process.env.PORT || 3000
