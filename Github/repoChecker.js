@@ -2,45 +2,56 @@
  * Created by Omar on 16/08/2016.
  */
 
-const repo = require('./repoConfig')
+const repo = require('./repoConfig.json')
 const https = require('https')
-const HOST = 'api.github.com'
-const PATH = ['/repos/', repo.github_username, '/', repo.github_repo_name].join('')
-const COMMITS_PATH = '/commits?since='
-const LANGUAGES_PATH = '/languages'
-const UAGENT = {'User-Agent': repo.github_username}
 
 let lastCheck
 let lastSHA
+let lastCommit
 
-function getFromAPI (complementaryPath, callback) {
-  https.get({host: HOST, path: PATH + complementaryPath, headers: UAGENT}, function (res) {
-    var data = ''
-    res.on('data', function (chunk) {
-      data += chunk.toString()
-    })
-    res.on('end', function () {
-      callback(JSON.parse(data))
+function getFromAPI (complementaryPath) {
+  return new Promise(function (resolve, reject) {
+    https.get({host: HOST, path: PATH + complementaryPath, headers: UAGENT}, function (res) {
+      var data = ''
+      res.on('data', function (chunk) {
+        data += chunk.toString()
+      })
+      res.on('end', function () {
+        resolve(JSON.parse(data))
+      })
+    }).on('error', function (error) {
+      reject(error)
     })
   })
 }
 
 module.exports = {
-  lastCheck: function (date) {
+  init: this.updateLastCheck,
+
+  updateLastCheck: function (date) {
     lastCheck = date
+    return lastCheck
   },
-  lastSHA: lastSHA,
+
+  updateLastSHA: function (newSHA) {
+    lastSHA = newSHA
+    return lastSHA
+  },
+
+  updateLastCommit: function (newCommit) {
+    lastCommit = newCommit
+    return lastCommit
+  },
+
+  shouldFetch: function (newSHA) {
+    return !checker.lastSHA || checker.lastSHA !== newSHA
+  },
+
   fetchCommits: function (callback) {
-    console.log('fetchCommits', lastCheck)
-    getFromAPI(COMMITS_PATH + lastCheck, function (commits) {
-      lastCheck = (new Date()).toISOString()
-      console.log('commitsinerepochecker', commits);
-      callback(commits)
-    })
+    return getFromAPI(COMMITS_PATH + lastCheck)
   },
-  fetchLanguages: function (callback) {
-    return getFromAPI(LANGUAGES_PATH, function (languages) {
-      callback(languages)
-    })
+
+  fetchLanguages: function () {
+    return getFromAPI(LANGUAGES_PATH)
   }
 }

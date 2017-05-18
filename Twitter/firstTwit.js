@@ -2,9 +2,9 @@ console.log('****** Configure your Twgit ******')
 console.log('Please provide the following information:')
 const fs = require('fs')
 const path = require('path')
-const Twit = require('twit')
+const poster = require('./postTwit')
 const inquirer = require('inquirer')
-require('../Github/repoChecker').lastCheck((new Date()).toISOString())
+require('../Github/repoChecker').init((new Date()).toISOString())
 
 inquirer.prompt([
   {
@@ -28,8 +28,38 @@ inquirer.prompt([
     name: 'timeout_ms',
     message: 'Timeout in millisecondes: ',
     default: '30000'
-  }]).then(function (twAnswers) {
-    createFile('/config.js', twAnswers, function (err) {
+  }
+])
+  .then(function (twAnswers) {
+    return createFile('/config.json', twAnswers)
+  })
+  .then(function () {
+    return inquirer.prompt([
+      {
+        type: 'input',
+        name: 'github_username',
+        message: 'Github username: '
+      }, {
+        type: 'input',
+        name: 'github_repo_name',
+        message: 'Repo name to track: '
+      }, {
+        type: 'input',
+        name: 'github_repo_url',
+        message: 'Repo url to track: '
+      }
+    ])
+  })
+  .then(function (gitAnswers) {
+    gitAnswers['repo_path'] = ['/repos/', gitAnswers.github_username, '/', gitAnswers.github_repo_name].join('')
+    gitAnswers['user_agent'] = { 'User-Agent': gitAnswers.github_username }
+    return createFile('../Github/repoConfig.json', gitAnswers)
+  })
+  .then(function () {
+    let twit = new Twit()
+  })
+
+    , function (err) {
       if (err) return console.log(err)
       inquirer.prompt([
         {
@@ -45,7 +75,7 @@ inquirer.prompt([
           name: 'github_repo_url',
           message: 'Repo url to track: '
         }]).then(function (gitAnswers) {
-          createFile('../Github/repoConfig.js', gitAnswers, function (err) {
+          createFile('../Github/repoConfig.json', gitAnswers, function (err) {
             if (err) return console.log(err)
             let twit = new Twit(require('./config'))
             firstTwit(twit)
@@ -54,14 +84,12 @@ inquirer.prompt([
     })
   })
 
-let formatConfig = function (string) {
-  return string.replace(/^{/, '{\n  ').replace(/,/g, ',\n  ').replace(/"/g, "'").replace(/:/g, ': ').replace(/}$/, '\n}')
-}
-
 let createFile = function (target, answers, callback) {
-  fs.writeFile(path.join(__dirname, target), 'module.exports = ' + formatConfig(JSON.stringify(answers)), function (err) {
-    if (err) callback(err)
-    callback(null)
+  return new Promise(function (resolve, reject) {
+    fs.writeFile(path.join(__dirname, target), JSON.stringify(answers, null, 2), function (err) {
+      if (err) return reject(err)
+      resolve()
+    })
   })
 }
 

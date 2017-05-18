@@ -1,5 +1,6 @@
 const repo = require('../Github/repoConfig')
-const Twit = require('twit')
+const config = require('./config.json')
+const twit = new require('twit')(config)
 
 module.exports = {
   createAndPost: function (commit, languages) {
@@ -22,5 +23,9 @@ module.exports = {
       if (err) return console.log('error', err)
       console.log('Twgit posted /,,/,')
     })
+  },
+
+  post: function (options) {
+
   }
 }

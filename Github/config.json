@@ -1,0 +1,5 @@
+{
+  "HOST": "api.github.com",
+  "COMMITS_PATH" : "/commits?since:",
+  "LANGUAGES_PATH" : "/languages"
+}

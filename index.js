@@ -3,15 +3,15 @@
 const checker = require('./Github/repoChecker')
 const twitMessager = require('./Twitter/postTwit')
 
-// To set the lastCheck to current time
-checker.lastCheck((new Date()).toISOString())
+// Init repoChecker to match current date
+checker.init((new Date()).toISOString())
 
 // In order to work with heroku I need a server so...
 const express = require('express')
 const app = express()
 
 app.all('*', function (req, res) {
-  res.send('<div>Hello, I\'m Twgitbot<br>Find me on <a href="https://github.com/VzqzAc/twgitbot">GitHub</a></div>')
+  res.redirect('https://github.com/VzqzAc/twgitbot')
 })
 
 let port = process.env.PORT || 3000
@@ -29,13 +29,33 @@ try {
 }
 
 function checkForChanges () {
-  checker.fetchCommits(function (commits) {
-    if (!commits.length) return
-    if (!checker.lastSHA || checker.lastSHA !== commits[0].sha) {
-      checker.lastSHA = commits[0].sha
-      checker.fetchLanguages(function (languages) {
-        twitMessager.createAndPost(commits[0], languages)
-      })
-    }
-  })
+  checker.fetchCommits()
+    .then(function (commits) {
+      if (!commits.length) return
+
+      let newSHA = commits[0].sha
+
+      if (checker.shouldFetch(newSHA)) {
+        checker.updateLastSHA(newSHA)
+        let newCommit = checker.updateLastCommit(commits[0])
+        checkLanguages(newCommit)
+        checker.fetchLanguages(function (languages) {
+          twitMessager.createAndPost(commits[0], languages)
+        })
+      }
+    })
+    .catch(console.error)
+}
+
+function checkLanguages (commit) {
+  checker.fetchLanguages()
+    .then(function (languages) {
+      publishTwit(commit, languages)
+    })
+    .catch(console.error)
+}
+
+function publishTwit (commit, languages) {
+  twitMessager.createAndPost(commit, languages)
+    .then()
 }
