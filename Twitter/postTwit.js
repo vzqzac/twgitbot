@@ -1,10 +1,14 @@
-const repo = require('../Github/repoConfig')
-const config = require('./config.json')
-const twit = new require('twit')(config)
+let repo
+let config
+let twit
 
 module.exports = {
-  createAndPost: function (commit, languages) {
-    let twit = new Twit(require('./config'))
+  init: function () {
+     repo = require('../Github/repoConfig')
+     config = require('./config.json')
+     twit = new (require('twit'))(config)
+  },
+  create: function (commit, languages) {
     let langs = ''
     if (languages) {
       let count = 0
@@ -16,16 +20,18 @@ module.exports = {
       }
       count = 0
     }
-    let tweet = {
+    return {
       status: 'Repo ' + repo.github_repo_name + ' updated! Take a look!' + langs + '\n' + repo.github_repo_url
     }
-    twit.post('statuses/update', tweet, function (err) {
-      if (err) return console.log('error', err)
-      console.log('Twgit posted /,,/,')
-    })
   },
 
   post: function (options) {
-
+    debugger
+    return new Promise(function (resolve, reject) {
+      twit.post('statuses/update', options, function (error) {
+        if (error) return reject(error)
+        resolve('Twgit posted /,,/,')
+      })
+    })
   }
 }

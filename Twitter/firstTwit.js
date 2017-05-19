@@ -4,7 +4,7 @@ const fs = require('fs')
 const path = require('path')
 const poster = require('./postTwit')
 const inquirer = require('inquirer')
-require('../Github/repoChecker').init((new Date()).toISOString())
+const checker = require('../Github/repoChecker')
 
 inquirer.prompt([
   {
@@ -56,35 +56,18 @@ inquirer.prompt([
     return createFile('../Github/repoConfig.json', gitAnswers)
   })
   .then(function () {
-    let twit = new Twit()
+    poster.init()
+    checker.init((new Date()).toISOString())
+    return firstTwit()
+  })
+  .then(function (success) {
+    console.log(success)
+  })
+  .catch(function (error) {
+    console.log(error)
   })
 
-    , function (err) {
-      if (err) return console.log(err)
-      inquirer.prompt([
-        {
-          type: 'input',
-          name: 'github_username',
-          message: 'Github username: '
-        }, {
-          type: 'input',
-          name: 'github_repo_name',
-          message: 'Repo name to track: '
-        }, {
-          type: 'input',
-          name: 'github_repo_url',
-          message: 'Repo url to track: '
-        }]).then(function (gitAnswers) {
-          createFile('../Github/repoConfig.json', gitAnswers, function (err) {
-            if (err) return console.log(err)
-            let twit = new Twit(require('./config'))
-            firstTwit(twit)
-          })
-        })
-    })
-  })
-
-let createFile = function (target, answers, callback) {
+const createFile = function (target, answers, callback) {
   return new Promise(function (resolve, reject) {
     fs.writeFile(path.join(__dirname, target), JSON.stringify(answers, null, 2), function (err) {
       if (err) return reject(err)
@@ -93,14 +76,10 @@ let createFile = function (target, answers, callback) {
   })
 }
 
-let firstTwit = function (twit) {
-  const git = require('../Github/repoConfig')
+const firstTwit = function () {
+  const repo = require('../Github/repoConfig')
   let tweet = {
-    status: 'Running my first #Twgit for my repo ' + git.github_repo_name + ' #Github #Twitter #Nodejs ' + git.github_repo_url
+    status: ['Running the first #Twgit for my repo ', repo.github_repo_name, ' #Github #Twitter #Nodejs ', repo.github_repo_url].join('')
   }
-  twit.post('statuses/update', tweet, tweeted)
-  function tweeted (err) {
-    if (err) return console.log('error', err)
-    console.log('First Twgit Worked /,,/,')
-  }
+  return poster.post(tweet)
 }

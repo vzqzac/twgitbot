@@ -1,5 +1,6 @@
-# twitter key
-config.js
+# sensitive info
+Github/*.json
+Twitter/*.json
 # dependencies
 node_modules
 # webstorm
@@ -7,3 +8,5 @@ node_modules
 # OS generated
 .DS_Store*
 [Tt]humbs.db
+# references
+*.old

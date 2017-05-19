@@ -2,7 +2,8 @@
  * Created by Omar on 16/08/2016.
  */
 
-const repo = require('./repoConfig.json')
+let repo
+const github = require('./config.json')
 const https = require('https')
 
 let lastCheck
@@ -11,7 +12,7 @@ let lastCommit
 
 function getFromAPI (complementaryPath) {
   return new Promise(function (resolve, reject) {
-    https.get({host: HOST, path: PATH + complementaryPath, headers: UAGENT}, function (res) {
+    https.get({ host: github.HOST, path: repo.path, headers: repo['User-Agent'] }, function (res) {
       var data = ''
       res.on('data', function (chunk) {
         data += chunk.toString()
@@ -26,7 +27,10 @@ function getFromAPI (complementaryPath) {
 }
 
 module.exports = {
-  init: this.updateLastCheck,
+  init: function (date) {
+    repo = require('./repoConfig.json')
+    lastCheck = date
+  },
 
   updateLastCheck: function (date) {
     lastCheck = date
@@ -44,14 +48,14 @@ module.exports = {
   },
 
   shouldFetch: function (newSHA) {
-    return !checker.lastSHA || checker.lastSHA !== newSHA
+    return !lastSHA || lastSHA !== newSHA
   },
 
   fetchCommits: function (callback) {
-    return getFromAPI(COMMITS_PATH + lastCheck)
+    return getFromAPI(github.COMMITS_PATH + lastCheck)
   },
 
   fetchLanguages: function () {
-    return getFromAPI(LANGUAGES_PATH)
+    return getFromAPI(github.LANGUAGES_PATH)
   }
 }
