@@ -26,7 +26,6 @@ module.exports = {
   },
 
   post: function (options) {
-    debugger
     return new Promise(function (resolve, reject) {
       twit.post('statuses/update', options, function (error) {
         if (error) return reject(error)
