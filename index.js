@@ -33,6 +33,7 @@ function checkForChanges () {
     .then(function (commits) {
       if (!commits.length) return
 
+      checker.updateLastCheck((new Date()).toISOString())
       let newSHA = commits[0].sha
 
       if (checker.shouldFetch(newSHA)) {
