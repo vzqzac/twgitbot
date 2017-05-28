@@ -57,5 +57,11 @@ module.exports = {
 
   fetchLanguages: function () {
     return getFromAPI(github.LANGUAGES_PATH)
+  },
+
+  props: {
+    lastCheck,
+    lastSHA,
+    lastCommit
   }
 }
